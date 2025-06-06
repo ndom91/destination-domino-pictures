@@ -9,7 +9,6 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -124,7 +123,7 @@ export default function Page() {
   const handleDownload = async (key: string) => {
     try {
       const signedUrl = await getSignedUrlForDownload(key)
-      // window.open(signedUrl, '_blank')
+      window.open(signedUrl, '_blank')
     } catch (error) {
       console.error('Error downloading file:', error)
       alert('Error downloading file')
