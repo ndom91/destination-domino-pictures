@@ -103,7 +103,7 @@ export default function Page() {
         }
       }
 
-      xhr.onerror = (e) => {
+      xhr.onerror = () => {
         toast.error(`Error uploading file ${file.name}, please try again`)
         // reject(new Error('Upload failed'))
         reject()
@@ -119,11 +119,11 @@ export default function Page() {
     })
   }
 
-  const handleCancelUpload = () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort()
-    }
-  }
+  // const handleCancelUpload = () => {
+  //   if (abortControllerRef.current) {
+  //     abortControllerRef.current.abort()
+  //   }
+  // }
 
   const handleDownload = async (key: string) => {
     try {

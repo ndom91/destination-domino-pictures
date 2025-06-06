@@ -5,7 +5,6 @@ import {
   GetObjectCommand,
   ListObjectsV2Command,
   DeleteObjectCommand,
-  PutBucketCorsCommand
 } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { FileObject, r2Client } from "@/app/lib/r2"
