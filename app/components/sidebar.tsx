@@ -90,7 +90,7 @@ export function Sidebar({ ...props }: Props) {
                   <ApertureIcon className="size-6" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <div className="truncate font-semibold">Domino Frame</div>
+                  <div className="truncate font-semibold">Destination Domino</div>
                   <div className="truncate text-xs flex items-center gap-2">Share the love</div>
                 </div>
               </a>

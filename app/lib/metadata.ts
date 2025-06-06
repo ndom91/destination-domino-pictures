@@ -13,8 +13,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Domino Frame",
-  description: "Manage your Frames",
+  title: "Destination Domino",
+  description: "Share your memories with us!",
   formatDetection: {
     email: false,
     address: false,
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Domino Frame',
-    description: 'Manage your Frames',
-    url: 'https://dominoframe.vercel.app',
-    siteName: 'Domino Frame',
+    title: 'Destination Domino',
+    description: 'Share your memories with us!',
+    url: 'https://destinationdomino.wedding',
+    siteName: 'Destination Domino',
     images: [
       {
         url: 'https://nextjs.org/og.png', // Must be an absolute URL
