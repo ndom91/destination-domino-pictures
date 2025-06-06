@@ -1,11 +1,12 @@
 "use client"
 
+import { toast } from "sonner"
 import { DownloadIcon } from "@phosphor-icons/react/dist/ssr/Download";
 import { TrashIcon } from "@phosphor-icons/react/dist/ssr/Trash";
 import { FileObject } from "@/app/lib/r2"
 import { deleteFile, getSignedUrlForDownload, getSignedUrlForUpload, listFiles } from "@/app/lib/r2-actions"
 import { Button } from "@/components/ui/button"
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useEffect, useRef, useState } from "react"
 import {
   Tooltip,
   TooltipContent,
@@ -15,7 +16,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Page() {
   const [files, setFiles] = useState<FileObject[]>([])
-  const [file, setFile] = useState<File | null>(null)
+  // const [file, setFile] = useState<File | null>(null)
   const [uploadProgress, setUploadProgress] = useState<number>(0)
   const [isUploading, setIsUploading] = useState<boolean>(false)
   const abortControllerRef = useRef<AbortController | null>(null)
@@ -35,14 +36,16 @@ export default function Page() {
     }
   }
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    console.log('handleFileChange.e.target.file', e.target.files)
     if (e.target.files) {
-      setFile(e.target.files[0])
+      // setFile(e.target.files[0])
+      await handleUpload(e.target.files[0])
     }
   }
 
-  const handleUpload = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleUpload = async (file: File) => {
+    console.log('handleUpload.file', file)
     if (!file) return
 
     setIsUploading(true)
@@ -58,15 +61,14 @@ export default function Page() {
         abortControllerRef.current.signal
       )
 
-      alert('File uploaded successfully!')
-      setFile(null) // Clear the file input
+      toast.success('File uploaded successfully!')
+      // setFile(null)
       fetchFiles()
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
-        console.log('Upload cancelled')
+        toast.info('Upload cancelled')
       } else {
         console.error('Error uploading file:', error)
-        alert('Error uploading file')
       }
     } finally {
       setIsUploading(false)
@@ -84,7 +86,7 @@ export default function Page() {
       const xhr = new XMLHttpRequest()
 
       xhr.open('PUT', signedUrl)
-      xhr.setRequestHeader('Content-Type', file.type)
+      // xhr.setRequestHeader('Content-Type', file.type)
 
       xhr.upload.onprogress = (event) => {
         if (event.lengthComputable) {
@@ -101,15 +103,18 @@ export default function Page() {
         }
       }
 
-      xhr.onerror = () => {
-        reject(new Error('Upload failed'))
+      xhr.onerror = (e) => {
+        toast.error(`Error uploading file ${file.name}, please try again`)
+        // reject(new Error('Upload failed'))
+        reject()
       }
 
       xhr.send(file)
 
       signal.addEventListener('abort', () => {
         xhr.abort()
-        reject(new Error('Upload cancelled'))
+        // toast.error(`Error uploading file ${file.name}, please try again`)
+        reject()
       })
     })
   }
@@ -126,62 +131,47 @@ export default function Page() {
       window.open(signedUrl, '_blank')
     } catch (error) {
       console.error('Error downloading file:', error)
-      alert('Error downloading file')
     }
   }
 
   const handleDelete = async (key: string) => {
     try {
       await deleteFile(key)
-      alert('File deleted successfully!')
+      toast.info('File deleted successfully!')
       fetchFiles()
     } catch (error) {
       console.error('Error deleting file:', error)
-      alert('Error deleting file')
+      toast.error('Error deleting file')
     }
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <h1 className="text-2xl">File Manager</h1>
+    <div className="flex flex-1 flex-col gap-4 p-12">
 
-      <form onSubmit={handleUpload} className="mb-8">
-        <div className="flex items-center space-x-4">
-          <label className="flex-1">
-            <input
-              type="file"
-              onChange={handleFileChange}
-              disabled={isUploading}
-              className="hidden"
-              id="file-upload"
-            />
-            <div className="cursor-pointer bg-muted/50 text-foreground rounded-lg px-2 py-2 border border-muted-foreground hover:bg-muted/75 transition duration-300">
-              {file ? file.name : 'Choose a file'}
-            </div>
-          </label>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="submit"
-                disabled={!file || isUploading}
-              >
-                {isUploading ? 'Uploading...' : 'Upload'}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent
-              hidden={isMobile}
-            >
-              {isUploading ? 'Uploading...' : 'Upload'}
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </form>
+      <div className="flex items-center justify-center w-full">
+        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+            </svg>
+            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
+          </div>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            disabled={isUploading}
+            className="hidden"
+            id="dropzone-file"
+          />
+        </label>
+      </div>
 
       {isUploading && (
         <div className="mb-8">
           <div className="w-full bg-muted-foreground rounded-full h-2.5 mb-4">
             <div
-              className="bg-blue-600 h-2.5 rounded-full"
+              className="bg-cyan-200/60 h-2.5 rounded-full"
               style={{ width: `${uploadProgress}%` }}
             ></div>
           </div>
@@ -189,12 +179,12 @@ export default function Page() {
             <p className="text-sm text-sidebar-foreground/30">
               {uploadProgress.toFixed(2)}% uploaded
             </p>
-            <button
-              onClick={handleCancelUpload}
-              className="text-red-500 hover:text-red-600 transition duration-300"
-            >
-              Cancel Upload
-            </button>
+            {/* <button */}
+            {/*   onClick={handleCancelUpload} */}
+            {/*   className="text-red-500 hover:text-red-600 transition duration-300" */}
+            {/* > */}
+            {/*   Cancel Upload */}
+            {/* </button> */}
           </div>
         </div>
       )}
