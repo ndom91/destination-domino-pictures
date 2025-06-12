@@ -49,24 +49,24 @@ export default function File({ file, updateFiles, userId }: { file: FileObject, 
   return (
     <li
       key={file.Key}
-      className="flex items-center justify-between bg-muted p-4 rounded-lg"
+      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-muted p-4 rounded-lg"
     >
-      <div className="flex gap-4 items-center">
-        <div className="w-[100] ">
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        <div className="">
           {imageUrl &&
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={imageUrl} alt="Image Preview" className="rounded-md aspect-video max-h-16 object-cover" />
+            <img src={imageUrl} alt="Image Preview" className="rounded-md aspect-video max-h-24 sm:max-h-16 object-cover" />
           }
         </div>
-        <span className="text-sidebar-foreground/50 truncate flex-1">{file.Key?.replace(`${userId}/`, '')}</span>
+        <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all">{file.Key?.replace(`${userId}/`, '')}</span>
       </div>
-      <div className="flex space-x-2">
+      <div className="flex flex-col sm:flex-row gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               onClick={() => file.Key && handleDownload(file.Key)}
               variant="outline"
-              size="icon"
+              size={isMobile ? "lg" : "icon"}
               title="Download"
             >
               <DownloadIcon />
@@ -83,7 +83,8 @@ export default function File({ file, updateFiles, userId }: { file: FileObject, 
             <Button
               onClick={() => file.Key && handleDelete(file.Key)}
               variant="outline"
-              size="icon"
+              size={isMobile ? "lg" : "icon"}
+              title="Delete"
             >
               <TrashIcon className="fill-red-300" />
             </Button>
