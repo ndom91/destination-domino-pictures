@@ -1,4 +1,4 @@
-import { Rouge_Script, Inter } from "next/font/google";
+import { Rouge_Script, Inter, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css";
 
@@ -15,6 +15,11 @@ const rougeScript = Rouge_Script({
   subsets: ["latin"],
 })
 
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${rougeScript.variable} antialiased grid place-items-center container mx-auto`}
+        className={`${inter.variable} ${rougeScript.variable} ${jetBrainsMono.variable} antialiased grid place-items-center container mx-auto`}
       >
         {children}
         <Toaster />
