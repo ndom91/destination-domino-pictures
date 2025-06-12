@@ -47,6 +47,12 @@ export default function FileManager() {
   const handleUpload = async (file: File) => {
     if (!file) return
 
+    // Max upload size 25mb
+    if (file.size > 25 * 1024 * 1024) {
+      toast.error("File size exceeds 25MB limit")
+      return
+    }
+
     setIsUploading(true)
     setUploadProgress(0)
     abortControllerRef.current = new AbortController()
