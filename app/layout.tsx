@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${rougeScript.variable} antialiased grid place-items-center`}
+        className={`${inter.variable} ${rougeScript.variable} antialiased grid place-items-center container mx-auto`}
       >
         {children}
         <Toaster />
