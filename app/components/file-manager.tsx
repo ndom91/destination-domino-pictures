@@ -52,6 +52,19 @@ export default function FileManager() {
 			return;
 		}
 
+		// Filter file type
+		const allowedFileTypes = [
+			"image/png",
+			"image/jpeg",
+			"image/gif",
+			"image/heic",
+			"image/svg+xml",
+		];
+		if (!allowedFileTypes.includes(file.type)) {
+			toast.error("File type not supported");
+			return;
+		}
+
 		setIsUploading(true);
 		setUploadProgress(0);
 		abortControllerRef.current = new AbortController();
@@ -125,21 +138,23 @@ export default function FileManager() {
 
 	return (
 		<div className="file-manager relative flex flex-1 flex-col gap-4 p-4 sm:p-12">
-			<div className="ribbon ribbon-top-left">
+			<div className="ribbon ribbon-top-left top-3 left-3 sm:top-11 sm:left-11 pointer-events-none">
 				<span className="">
 					<div className="seal">
 						<div className="embossed">
 							<svg
+								stroke="currentColor"
+								fill="currentColor"
+								stroke-width="0"
+								viewBox="0 0 24 24"
 								xmlns="http://www.w3.org/2000/svg"
-								width="32"
-								height="32"
-								style={{ fill: "var(--seal-color)" }}
-								viewBox="0 0 256 256"
 							>
-								<title>Camera Icon</title>
+								<title>Camera</title>
+								<path fill="none" d="M0 0h24v24H0z" />
+								<circle cx="12" cy="12" r="3.2" />
 								<path
-									filter="url(#Bevel)"
-									d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"
+									filter="url(#Bevel2)"
+									d="M9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"
 								/>
 								<filter
 									id="Bevel"
@@ -248,12 +263,12 @@ export default function FileManager() {
 								d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
 							/>
 						</svg>
-						<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+						<p className="mb-2 text-base text-gray-500 dark:text-gray-400">
 							<span className="font-semibold">Click to upload</span> or drag and
 							drop
 						</p>
-						<p className="text-xs text-gray-500 dark:text-gray-400">
-							SVG, PNG, JPG or GIF
+						<p className="text-sm text-gray-500 dark:text-gray-400">
+							SVG, PNG, JPG, HEIC or GIF
 						</p>
 					</div>
 					<input

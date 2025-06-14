@@ -143,46 +143,40 @@
   }
 }
 
+.file-manager {
+  --seal-color: rgb(229 72 77);
+  --parchment-color: #F1DAD2;
+}
+
 /* Ribbon */
-/* common */
 .ribbon {
   width: 150px;
   height: 150px;
   overflow: hidden;
   position: absolute;
 }
+
 .ribbon::before,
 .ribbon::after {
   position: absolute;
-  z-index: -1;
   content: "";
   display: block;
-  border: 5px solid var(--seal-color);
+  border: 3px solid #ddc2b9;
 }
+
 .ribbon span {
   position: absolute;
   display: block;
   width: 225px;
   padding: 15px 0;
-  background-color: color-mix(in srgb, var(--seal-color), black 10%);
-  /* rgb(var(--seal-color) / 0.1); */
+  background-color: var(--parchment-color);
+  /* background-color: color-mix(in srgb, var(--parchment-color), white 10%); */
   color: #fff;
   font: 700 18px / 1 "Lato", sans-serif;
-  /* box-shadow: 0 5px 10px rgba(0,0,0,.2); */
-  /* text-shadow: 0 1px 1px rgba(0,0,0,.2); */
   text-transform: uppercase;
   text-align: center;
 
   @apply shadow-md;
-}
-
-.file-manager {
-  --seal-color: rgb(229 72 77);
-}
-
-.ribbon-top-left {
-  top: 40px;
-  left: 40px;
 }
 
 .ribbon-top-left::before,
@@ -221,7 +215,7 @@
 
   background: var(--seal-color);
   color: var(--seal-color);
-  border-color: var(--seal-color);
+  /* border-color: var(--seal-color); */
 
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2) inset, 0 3px 3px rgba(255, 255, 255, 0.6) inset, 0 1px 5px
     rgba(0, 0, 0, 0.8);
@@ -288,6 +282,7 @@
 
 .seal svg {
   position: absolute;
-  top: 11px;
-  left: 12px;
+  top: 8px;
+  left: 8px;
+  right: 8px;
 }
