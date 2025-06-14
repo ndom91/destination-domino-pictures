@@ -1,8 +1,15 @@
 import { Rouge_Script, Inter, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css";
+import localFont from 'next/font/local'
 
 export { viewport, metadata } from "@/app/lib/metadata";
+
+const departureMono = localFont({
+  src: './assets/fonts/DepartureMono.woff2',
+  display: 'swap',
+  variable: '--font-departure-mono',
+})
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${rougeScript.variable} ${jetBrainsMono.variable} antialiased grid place-items-center container mx-auto`}
+        className={`${inter.variable} ${rougeScript.variable} ${jetBrainsMono.variable} ${departureMono.variable} antialiased grid place-items-center container mx-auto`}
       >
         {children}
         <Toaster />
