@@ -9,6 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "biome format --write",
+    "check": "biome check",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
@@ -34,6 +36,7 @@
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

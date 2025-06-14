@@ -1,16 +1,17 @@
-import type { Metadata } from "next"; import type { Viewport } from 'next'
+import type { Metadata } from "next";
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  colorScheme: 'dark light',
-}
+  colorScheme: "dark light",
+};
 
 export const metadata: Metadata = {
   title: "Destination Domino",
@@ -31,25 +32,25 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Destination Domino',
-    description: 'Share your memories with us!',
-    url: 'https://destinationdomino.wedding',
-    siteName: 'Destination Domino',
+    title: "Destination Domino",
+    description: "Share your memories with us!",
+    url: "https://destinationdomino.wedding",
+    siteName: "Destination Domino",
     images: [
       {
-        url: 'https://nextjs.org/og.png', // Must be an absolute URL
+        url: "https://nextjs.org/og.png", // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: 'https://nextjs.org/og-alt.png', // Must be an absolute URL
+        url: "https://nextjs.org/og-alt.png", // Must be an absolute URL
         width: 1800,
         height: 1600,
-        alt: 'My custom alt',
+        alt: "My custom alt",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   // icons: {
   //   icon: [
