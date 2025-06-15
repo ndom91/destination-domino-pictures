@@ -49,24 +49,22 @@ export default function File({
   return (
     <li
       key={file.Key}
-      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-muted p-4 rounded-lg"
+      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-stone-200/80 rounded-lg"
     >
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="">
-          {imageUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={imageUrl}
-              alt="Image Preview"
-              className="rounded-md aspect-video max-h-24 sm:max-h-16 object-cover"
-            />
-          )}
-        </div>
-        <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all">
+      <div className="flex flex-col sm:flex-row items-start sm:items-stretch sm:max-h-24 p-4 sm:p-0">
+        {imageUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={imageUrl}
+            alt="Image Preview"
+            className="rounded-md sm:rounded-r-none aspect-video w-38 sm:w-32 object-cover"
+          />
+        )}
+        <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all inline-block align-middle sm:flex sm:items-center pt-4 sm:pl-4 sm:py-0">
           {file.Key?.replace(`${userId}/`, "")}
         </span>
       </div>
-      <div className="flex flex-col sm:flex-row gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto">
+      <div className="flex flex-col sm:flex-row gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto sm:p-4 sm:pl-0">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
