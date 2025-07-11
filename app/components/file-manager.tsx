@@ -120,9 +120,9 @@ export default function FileManager() {
   return (
     <div className="file-manager relative flex flex-1 flex-col gap-8 p-4 sm:p-8 rounded-b-lg border-2 border-gray-100">
       <div className="flex justify-center items-center w-full">
-        <div className="font-sans text-sm text-stone-700 bg-stone-100 rounded-md p-8 border-2 border-stone-200/60 text-pretty">
-          Beautiful pictures of you and your group? Snapshots of the groom looking nervous? {`We'd`} love them all!
-          Uploading your photos here only gives us, Tonio and Carla, access.
+        <div className="font-sans text-sm md:text-lg py-4 text-stone-700 rounded-md text-pretty">
+          Did you capture some beautiful pictures of you and your group? Snapshots of the groom looking nervous?{" "}
+          {`We'd`} love them all! Uploading your photos here only gives us, Tonio and Carla, access.
         </div>
       </div>
       <div className="flex flex-col relative gap-8">
@@ -133,7 +133,7 @@ export default function FileManager() {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -152,7 +152,7 @@ export default function FileManager() {
                       specularConstant="0.5"
                       specularExponent="10"
                       result="specOut"
-                      lighting-color="white"
+                      lightingColor="white"
                     >
                       <fePointLight x="-5000" y="-10000" z="20000" />
                     </feSpecularLighting>
@@ -176,7 +176,7 @@ export default function FileManager() {
                       specularConstant="0.5"
                       specularExponent="10"
                       result="specOut"
-                      lighting-color="white"
+                      lightingColor="white"
                     >
                       <fePointLight x="-5000" y="-10000" z="0000" />
                     </feSpecularLighting>
