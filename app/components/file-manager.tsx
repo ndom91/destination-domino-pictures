@@ -248,7 +248,7 @@ export default function FileManager() {
 
         {files.length > 0 && (
           <div className="bg-stone-100 rounded-lg p-4 border-2 border-stone-200/60">
-            <h2 className="font-sans text-xl mb-4 ml-2 text-sidebar-foreground/70">Your Files</h2>
+            <h2 className="font-sans text-xl mb-4 ml-2 text-sidebar-foreground/70">Uploaded Files</h2>
             <ul className="space-y-4">
               {files.map((file) => (
                 <File key={file.Key} file={file} updateFiles={fetchFiles} userId={userId} />
