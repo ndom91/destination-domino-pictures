@@ -49,7 +49,7 @@ export default function File({
   return (
     <li
       key={file.Key}
-      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-stone-200/80 rounded-lg"
+      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-gray-200 rounded-lg"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-stretch sm:max-h-24 p-4 sm:p-0">
         {imageUrl && (
@@ -57,23 +57,24 @@ export default function File({
           <img
             src={imageUrl}
             alt="Image Preview"
-            className="rounded-md sm:rounded-r-none aspect-video w-38 sm:w-32 object-cover"
+            className="rounded-md sm:rounded-r-none aspect-video w-48 sm:w-32 object-cover"
           />
         )}
-        <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all inline-block align-middle sm:flex sm:items-center pt-4 sm:pl-4 sm:py-0">
+        <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all inline-block tracking-tight align-middle sm:flex sm:items-center pt-4 sm:pl-4 sm:py-0">
           {file.Key?.replace(`${userId}/`, "")}
         </span>
       </div>
-      <div className="flex flex-col sm:flex-row gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto sm:p-4 sm:pl-0">
+      <div className="flex flex-col h-[calc(100%_-_2rem)] sm:flex-row justify-between sm:justify-end gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto sm:p-4 sm:pl-0">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               onClick={() => file.Key && handleDownload(file.Key)}
               variant="outline"
-              size={isMobile ? "lg" : "icon"}
+              size={isMobile ? undefined : "icon"}
               title="Download"
+              className={isMobile ? "size-18" : ""}
             >
-              <DownloadIcon />
+              <DownloadIcon className={isMobile ? "size-5" : ""} />
             </Button>
           </TooltipTrigger>
           <TooltipContent hidden={isMobile}>Download File</TooltipContent>
@@ -83,10 +84,11 @@ export default function File({
             <Button
               onClick={() => file.Key && handleDelete(file.Key)}
               variant="outline"
-              size={isMobile ? "lg" : "icon"}
+              size={isMobile ? undefined : "icon"}
               title="Delete"
+              className={isMobile ? "size-18" : ""}
             >
-              <TrashIcon className="fill-red-300" />
+              <TrashIcon className={isMobile ? "size-5 fill-red-300" : "fill-red-300"} />
             </Button>
           </TooltipTrigger>
           <TooltipContent hidden={isMobile}>Delete File</TooltipContent>
