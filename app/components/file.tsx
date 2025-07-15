@@ -49,22 +49,22 @@ export default function File({
   return (
     <li
       key={file.Key}
-      className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-gray-200 rounded-lg"
+      className="relative flex flex-row items-start sm:items-center justify-between gap-2 bg-gray-200 rounded-lg"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-stretch sm:max-h-24 p-4 sm:p-0">
+      <div className="flex flex-col sm:flex-row items-start sm:items-stretch sm:max-h-24 p-4 pr-2 sm:p-0">
         {imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={imageUrl}
             alt="Image Preview"
-            className="rounded-md sm:rounded-r-none aspect-video w-48 sm:w-32 object-cover"
+            className="rounded-md sm:rounded-r-none aspect-video w-full sm:w-32 object-cover"
           />
         )}
         <span className="text-sidebar-foreground/50 truncate flex-1 text-balance break-all inline-block tracking-tight align-middle sm:flex sm:items-center pt-4 sm:pl-4 sm:py-0">
           {file.Key?.replace(`${userId}/`, "")}
         </span>
       </div>
-      <div className="flex flex-col h-[calc(100%_-_2rem)] sm:flex-row justify-between sm:justify-end gap-2 absolute top-4 right-4 sm:relative sm:top-auto sm:right-auto sm:p-4 sm:pl-0">
+      <div className="flex flex-col h-full p-4 pl-0 sm:flex-row justify-between sm:justify-end gap-2 top-4 right-4 sm:relative sm:top-auto sm:right-auto">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -72,7 +72,7 @@ export default function File({
               variant="outline"
               size={isMobile ? undefined : "icon"}
               title="Download"
-              className={isMobile ? "size-18" : ""}
+              className={isMobile ? "size-18 border-0 text-gray-800" : "text-gray-800 border-0"}
             >
               <DownloadIcon className={isMobile ? "size-5" : ""} />
             </Button>
@@ -86,7 +86,7 @@ export default function File({
               variant="outline"
               size={isMobile ? undefined : "icon"}
               title="Delete"
-              className={isMobile ? "size-18" : ""}
+              className={isMobile ? "size-18 border-0" : "border-0"}
             >
               <TrashIcon className={isMobile ? "size-5 fill-red-300" : "fill-red-300"} />
             </Button>

@@ -119,7 +119,7 @@ export default function FileManager() {
 
   return (
     <div className="file-manager relative flex flex-1 flex-col gap-8 p-4 sm:p-8 rounded-b-lg border-1 border-gray-200">
-      <div className="flex justify-center items-center w-full gap-4">
+      <div className="flex justify-center w-full gap-4">
         <div className="font-sans text-sm md:text-lg font-light tracking-tight text-stone-700 rounded-md text-pretty">
           Did you capture some beautiful pictures of you and your group? Snapshots of the groom looking nervous?{" "}
           {`We'd`} love them all! Any extra photos that {`didn't`} fit on your portable cameras are welcome here too.
@@ -258,19 +258,7 @@ export default function FileManager() {
         {files.length > 0 && (
           <div className="bg-gray-100 rounded-md p-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-cursive text-3xl tracking-wide text-sidebar-foreground/70">Uploaded Files</h2>
-              {/* <div className="flex gap-2 items-center"> */}
-              {/*   <label htmlFor="email" className="text-sm text-gray-800"> */}
-              {/*     Email */}
-              {/*   </label> */}
-              {/*   <input */}
-              {/*     type="text" */}
-              {/*     id="email" */}
-              {/*     data-1p-ignore */}
-              {/*     placeholder="user@gmail.com" */}
-              {/*     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-rose-300 focus:ring-2 focus:border-rose-400 block w-full p-2.5 outline-none transition-all" */}
-              {/*   /> */}
-              {/* </div> */}
+              <h2 className="text-xl tracking-tight text-sidebar-foreground/70">Uploaded Files</h2>
             </div>
             <ul className="space-y-4">
               {files.map((file) => (
